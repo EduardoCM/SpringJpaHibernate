@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,26 @@ public class CourseRepositoryTest {
 	public void contectLoads() {
 		Course course = repository.findById(1002L);
 		assertEquals("Spring boot Expert", course.getName());
-
 	}
+	
+	@Test
+	public void deleteById_basic() {
+		repository.deleteById(1001L);
+		assertNull(repository.findById(1001L));
+	}
+	
+	@Test
+	public void save_basic() {
+		Course course = repository.findById(1002L);
+		course.setName("JPA Update");
+		
+		repository.save(course);
+		assertEquals("JPA Update", repository.findById(1002L).getName());
+		
+		repository.save(new Course("Togaf Certified"));
+		
+         Course course2 = repository.findById(2L);
+         
+         assertEquals("Web Services in SOA and MicroServices", course2.getName());
+	}	
 }

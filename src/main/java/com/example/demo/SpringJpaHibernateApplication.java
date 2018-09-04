@@ -31,6 +31,10 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 		repository.deleteById(1003L);
 		
 		logger.info("Deleting 103 :: ");
+		
+		repository.save(new Course("Solutions digitals Arquitect"));
+		
+		repository.playWithEntityManager();
 	
 	
 	}
